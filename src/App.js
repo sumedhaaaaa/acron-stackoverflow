@@ -71,17 +71,7 @@ function App() {
             <QuestionsSection />
           </Box>
 
-          {/* Questions List */}
-          <Box
-            sx={{
-              flex: 1,
-              backgroundColor: '#ffffff',
-              padding: '10px',
-              overflowY: 'auto',
-            }}
-          >
-            <QuestionsList />
-          </Box>
+          
         </Grid>
 
         {/* Right Sidebar */}
