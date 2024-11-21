@@ -21,7 +21,6 @@ const QuestionsList = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h3 style={{ marginBottom: "20px" }}>Top Questions</h3>
       {questions.map((question, index) => (
         <QuestionCard key={index} {...question} />
       ))}
@@ -29,4 +28,4 @@ const QuestionsList = () => {
   );
 };
 
-export default QuestionsList
+export default QuestionsList;
