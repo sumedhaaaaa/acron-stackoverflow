@@ -1,68 +1,97 @@
 import React from "react";
-import { TextField, IconButton } from "@mui/material";
-import { Search, Chat, Notifications, EmojiEvents, AccountCircle } from "@mui/icons-material";
+import { AppBar, Toolbar, Typography, Box, InputBase, IconButton, Avatar } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import MessageIcon from "@mui/icons-material/ChatBubbleOutline";
+import TrophyIcon from "@mui/icons-material/EmojiEventsOutlined";
+import NotificationIcon from "@mui/icons-material/NotificationsNone";
 
 const Header = () => {
   return (
-   < div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "#FFFFFF",
         padding: "10px 20px",
-        borderBottom: "1px solid #ddd",
-        backgroundColor: "white",
+        boxShadow: "none",
+        borderBottom: "2px solid #FF8A3C",
+        borderRadius: "8px 8px 0 0",
       }}
     >
-      {/* Logo */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <img
-          src="https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"
-          alt="StackOverflow Logo"
-          style={{ height: 30, marginRight: 10 }}
-        />
-        <span style={{ fontSize: "18px", fontWeight: "bold", color: "#f48024" }}>
-          stack<span style={{ color: "black" }}>overflow</span>
-        </span>
-      </div>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        {/* Logo Section */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <img
+            src="https://cdn.sstatic.net/Img/favicons/favicon.ico"
+            alt="StackOverflow Logo"
+            style={{ width: "30px", height: "30px" }}
+          />
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              color: "#000000",
+              fontWeight: "bold",
+              fontSize: "18px",
+            }}
+          >
+            stack<strong>overflow</strong>
+          </Typography>
+        </Box>
 
-      {/* Search bar */}
-      <div style={{ flex: 1, marginLeft: 20, marginRight: 20 }}>
-        <TextField
-          placeholder="Search Your Answers Here..."
-          variant="outlined"
-          size="small"
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <IconButton>
-                <Search />
-              </IconButton>
-            ),
+        {/* Search Bar */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "#F5F5F5",
+            borderRadius: "20px",
+            padding: "5px 15px",
+            width: "50%",
           }}
-        />
-      </div>
+        >
+          <InputBase
+            placeholder="Search Your Answers Here..."
+            sx={{
+              flex: 1,
+              fontSize: "14px",
+              color: "#757575",
+            }}
+          />
+          <IconButton
+            sx={{
+              color: "#FF8A3C",
+            }}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Box>
 
-      {/* Right-side icons */}
-      <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
-        {/* Chat Icon */}
-        <IconButton>
-          <Chat />
-        </IconButton>
-        {/* Trophy Icon */}
-        <IconButton>
-          <EmojiEvents />
-        </IconButton>
-        {/* Notifications Icon */}
-        <IconButton>
-          <Notifications />
-        </IconButton>
-        {/* Profile Icon */}
-        <IconButton>
-          <AccountCircle />
-        </IconButton>
-      </div>
-    </div>
+        {/* Icons Section */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: "20px" }}>
+          <IconButton sx={{ color: "#757575" }}>
+            <MessageIcon />
+          </IconButton>
+          <IconButton sx={{ color: "#757575" }}>
+            <TrophyIcon />
+          </IconButton>
+          <IconButton sx={{ color: "#757575" }}>
+            <NotificationIcon />
+          </IconButton>
+          <Avatar
+            alt="User Profile"
+            src="https://i.pravatar.cc/300"
+            sx={{ width: 32, height: 32 }}
+          />
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 
