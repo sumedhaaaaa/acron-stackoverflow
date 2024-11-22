@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography, Button, Stack } from '@mui/material';
 import QuestionsList from './QuestionsList';
 
-const QuestionsSection = () => {
+const QuestionsSection = ({searchData}) => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tab, settab] = useState('Interesting');
@@ -25,7 +25,6 @@ const QuestionsSection = () => {
   };
 
   useEffect(() => {
-    // Fetch questions using the fetch API
     const fetchQuestions = async url => {
       try {
         const response = await fetch(url);
@@ -33,14 +32,13 @@ const QuestionsSection = () => {
           throw new Error('Failed to fetch questions');
         }
         const data = await response.json();
-        setQuestions(data.items); // Set the fetched questions in state
+        setQuestions(data.items); 
         setLoading(false);
       } catch (error) {
         console.error('Error fetching questions:', error);
         setLoading(false);
       }
     };
-    console.log(tab);
     if (tab === 'Interesting') {
       fetchQuestions(
         'https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow'
@@ -64,6 +62,11 @@ const QuestionsSection = () => {
       );
     }
   }, [tab]);
+
+  useEffect(()=>{
+    console.log(searchData);
+    setQuestions(searchData);
+  }, [searchData]);
 
   return (
     <div>

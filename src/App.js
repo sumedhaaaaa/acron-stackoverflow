@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Header from './components/Header';
 import QuestionsList from './components/QuestionsList';
@@ -8,6 +8,24 @@ import QuestionsSection from './components/QuestionsSection';
 import { Grid, Box } from '@mui/material';
 
 function App() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const handleSearch = async query => {
+    // setLoading(true);
+    if(query!==''){
+      try {
+        const response = await fetch(`https://api.stackexchange.com/2.3/search?order=desc&sort=activity&intitle=${query}&site=stackoverflow`);
+        if (!response.ok) throw new Error("Failed to fetch data");
+        const result = await response.json();
+        setData(result.items);
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(query);
+    }
+  };
+
   return (
     <Grid
       container
@@ -25,7 +43,7 @@ function App() {
           padding: '10px',
         }}
       >
-        <Header />
+        <Header handleSearch={handleSearch}/>
       </Grid>
 
       {/* Main Content */}
@@ -41,7 +59,7 @@ function App() {
         {/* Sidebar */}
         <Grid
           item
-          xs={2} // Adjust this for sidebar width
+          xs={2} 
           sx={{
             backgroundColor: '#ffffff',
             overflowY: 'auto',
@@ -53,7 +71,7 @@ function App() {
         {/* Middle Content */}
         <Grid
           item
-          xs={7} // Adjust this for the middle content width
+          xs={7} 
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -68,7 +86,7 @@ function App() {
               padding: '10px',
             }}
           >
-            <QuestionsSection />
+            <QuestionsSection searchData={data}/>
           </Box>
 
           
