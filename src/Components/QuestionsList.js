@@ -8,7 +8,9 @@ const QuestionsList = ({ questions, loading }) => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        questions.map(question => <QuestionCard question={question} />)
+        questions.map(question => (
+          <QuestionCard key={question.question_id} question={question} />
+        ))
       )}
     </div>
   );

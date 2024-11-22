@@ -5,15 +5,30 @@ import QuestionsList from './QuestionsList';
 const QuestionsSection = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [tab, settab] = useState('interesting');
+  const [tab, settab] = useState('Interesting');
+
+  const activeSx = {
+    backgroundColor: '#F48024',
+    color: '#FFFFFF',
+    textTransform: 'none',
+    fontWeight: 'bold',
+    borderRadius: '20px',
+    '&:hover': {
+      backgroundColor: '#E57300',
+    },
+  };
+
+  const nonActiveSx = {
+    color: '#555',
+    textTransform: 'none',
+    fontWeight: 'normal',
+  };
 
   useEffect(() => {
     // Fetch questions using the fetch API
-    const fetchQuestions = async () => {
+    const fetchQuestions = async url => {
       try {
-        const response = await fetch(
-          'https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow'
-        );
+        const response = await fetch(url);
         if (!response.ok) {
           throw new Error('Failed to fetch questions');
         }
@@ -25,9 +40,30 @@ const QuestionsSection = () => {
         setLoading(false);
       }
     };
-
-    fetchQuestions();
-  }, []);
+    console.log(tab);
+    if (tab === 'Interesting') {
+      fetchQuestions(
+        'https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&site=stackoverflow'
+      );
+    } else if (tab === 'Bountied') {
+      console.log(tab);
+      fetchQuestions(
+        'https://api.stackexchange.com/2.3/questions/featured?order=desc&sort=activity&site=stackoverflow'
+      );
+    } else if (tab === 'Hot') {
+      fetchQuestions(
+        'GET https://api.stackexchange.com/2.3/questions?order=desc&sort=hot&site=stackoverflow'
+      );
+    } else if (tab === 'Week') {
+      fetchQuestions(
+        'https://api.stackexchange.com/2.3/questions?order=desc&sort=week&site=stackoverflow'
+      );
+    } else if (tab === 'Month') {
+      fetchQuestions(
+        'https://api.stackexchange.com/2.3/questions?order=desc&sort=month&site=stackoverflow'
+      );
+    }
+  }, [tab]);
 
   return (
     <div>
@@ -55,30 +91,14 @@ const QuestionsSection = () => {
             Top Question
           </Typography>
           <Stack direction='row' spacing={2}>
-            <Button
-              variant='contained'
-              sx={{
-                backgroundColor: '#F48024',
-                color: '#FFFFFF',
-                textTransform: 'none',
-                fontWeight: 'bold',
-                borderRadius: '20px',
-                '&:hover': {
-                  backgroundColor: '#E57300',
-                },
-              }}
-            >
-              Interesting
-            </Button>
-            {['Bountied', 'Hot', 'Week', 'Month'].map(label => (
+            {['Interesting', 'Bountied', 'Hot', 'Week', 'Month'].map(label => (
               <Button
                 key={label}
                 variant='text'
-                sx={{
-                  color: '#555',
-                  textTransform: 'none',
-                  fontWeight: 'normal',
+                onClick={() => {
+                  settab(label);
                 }}
+                sx={tab === label ? activeSx : nonActiveSx}
               >
                 {label}
               </Button>
