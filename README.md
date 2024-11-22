@@ -1,11 +1,12 @@
 # Stackoverflow Clone
-# [VISIT] : https://sumedhaaaaa.github.io/acron-stackoverflow
+[VISIT] : https://sumedhaaaaa.github.io/acron-stackoverflow .\
 This project is built using React.js and Material UI.
+![Alt text](/screenshots/s1.jpg?raw=true "Optional Title")
 
 # Features
-Dynamic questions sections using the StackOverflow open APIs.
-Question filters like hot, week, etc, using the StackOverflow open APIs.
-Dynamic Search using the StackOverflow open APIs.
+Dynamic questions sections using the StackOverflow open APIs. .\
+Question filters like hot, week, etc, using the StackOverflow open APIs. .\
+Dynamic Search using the StackOverflow open APIs. .\
 
 # Getting Started with Create React App
 
